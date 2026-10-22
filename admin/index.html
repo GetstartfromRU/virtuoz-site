@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Админ-панель — Мастерская «ВИРТУОЗ»</title>
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<div class="login" id="loginView" hidden>
+  <div class="login-card">
+    <h1>Вход для мастера</h1>
+    <p>Управление товарами и новостями сайта «ВИРТУОЗ». Введите логин и пароль, выданные при настройке.</p>
+    <div class="f"><label for="inEmail">Email</label><input id="inEmail" type="email" autocomplete="username" placeholder="mail@example.com"></div>
+    <div class="f"><label for="inPass">Пароль</label><input id="inPass" type="password" autocomplete="current-password" placeholder="Пароль"></div>
+    <button class="btn btn-primary" id="btnLogin" style="width:100%">Войти</button>
+    <p class="err" id="loginErr"></p>
+    <p class="t-meta" style="margin-top:14px"><a href="../index.html">← На сайт</a></p>
+  </div>
+</div>
+
+<div id="appView" hidden>
+  <header class="topbar">
+    <div class="topbar-in">
+      <a class="logo" href="../index.html"><b>ВИРТУОЗ</b> · админка</a>
+      <span class="user" id="userEmail"></span>
+      <button class="btn btn-ghost btn-sm" id="btnLogout">Выйти</button>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <div class="tabs" role="tablist">
+      <button class="tab" id="tabProducts" role="tab" aria-selected="true">Товары</button>
+      <button class="tab" id="tabNews" role="tab" aria-selected="false">Новости</button>
+    </div>
+
+    <section id="secProducts">
+      <div class="toolbar">
+        <button class="btn btn-primary" id="btnAddProduct">+ Добавить товар</button>
+        <span class="hint">Изменения появляются на сайте сразу после сохранения.</span>
+      </div>
+      <div id="productList"></div>
+    </section>
+
+    <section id="secNews" hidden>
+      <div class="toolbar">
+        <button class="btn btn-primary" id="btnAddNews">+ Добавить новость</button>
+        <span class="hint">Новости с сайта VK добавляются автоматически, здесь — ваши собственные.</span>
+      </div>
+      <div id="newsList"></div>
+    </section>
+  </div>
+</div>
+
+<div class="modal-back" id="modalBack" hidden style="display:none">
+  <div class="modal">
+    <h2 id="modalTitle"></h2>
+    <div id="modalBody"></div>
+    <p class="err" id="modalErr"></p>
+    <div class="f-actions">
+      <button class="btn btn-ghost" id="modalCancel">Отмена</button>
+      <button class="btn btn-primary" id="modalSave">Сохранить</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="../js/config.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>
