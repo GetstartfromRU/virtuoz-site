@@ -1,0 +1,9 @@
+{
+  "name": "Мастерская мебели «ВИРТУОЗ»",
+  "short_name": "ВИРТУОЗ",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#14161a",
+  "theme_color": "#14161a",
+  "icons": [{ "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml" }]
+}
