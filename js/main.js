@@ -29,6 +29,61 @@
   try { saved = localStorage.getItem(THEME_KEY) || 'dark'; } catch (e) {}
   setTheme(saved);
 
+  var SLOGANS = [
+    'Виртуозность в каждой детали',
+    'Виртуозность в каждом стежке',
+    'Ваша мебель в руках виртуоза',
+    'Виртуозно. Аккуратно. Навсегда.',
+    'Мастерство, которое видно',
+    'Работаем, пока не станет идеально',
+    'Каждая работа — подпись мастера',
+    'Вторая жизнь вашей любимой мебели',
+    'Ткань новая — душа та же',
+    'Аккуратность — наш главный инструмент',
+    'Доверьте мебель виртуозу',
+    'Виртуоз — это не имя, это уровень'
+  ];
+  var SLOGAN_KEY = 'mebel-slogan-last';
+  var sloganEl = document.getElementById('heroSlogan');
+  if (sloganEl && SLOGANS.length > 1) {
+    var lastSlogan = -1;
+    try { lastSlogan = parseInt(localStorage.getItem(SLOGAN_KEY), 10); } catch (e) {}
+    if (isNaN(lastSlogan)) { lastSlogan = -1; }
+    var sloganIdx = Math.floor(Math.random() * SLOGANS.length);
+    if (sloganIdx === lastSlogan) { sloganIdx = (sloganIdx + 1) % SLOGANS.length; }
+    try { localStorage.setItem(SLOGAN_KEY, String(sloganIdx)); } catch (e) {}
+    sloganEl.textContent = SLOGANS[sloganIdx];
+    sloganEl.classList.add('swap');
+  }
+
+  var navToggle = document.querySelector('.nav-toggle');
+  var mobileNav = document.getElementById('mobileNav');
+  function closeMobileNav() {
+    if (!mobileNav || mobileNav.hidden) { return; }
+    mobileNav.hidden = true;
+    if (navToggle) { navToggle.setAttribute('aria-expanded', 'false'); }
+  }
+  if (navToggle && mobileNav) {
+    navToggle.addEventListener('click', function () {
+      var open = mobileNav.hidden;
+      mobileNav.hidden = !open;
+      navToggle.setAttribute('aria-expanded', String(open));
+    });
+    mobileNav.addEventListener('click', function (e) {
+      if (e.target.closest('a')) { closeMobileNav(); }
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') { closeMobileNav(); }
+    });
+    document.addEventListener('click', function (e) {
+      if (mobileNav.hidden) { return; }
+      if (!mobileNav.contains(e.target) && !navToggle.contains(e.target)) { closeMobileNav(); }
+    });
+    window.addEventListener('resize', function () {
+      if (window.innerWidth > 660) { closeMobileNav(); }
+    });
+  }
+
   var revealObserver = null;
   if ('IntersectionObserver' in window) {
     revealObserver = new IntersectionObserver(function (entries) {
